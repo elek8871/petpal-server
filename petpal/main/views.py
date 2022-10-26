@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework import viewsets, permisssions
+from rest_framework import viewsets, permissions
 from .serializers import UserSerializer, PetSerializer
 from .models import User, Pet
 

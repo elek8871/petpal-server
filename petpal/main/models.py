@@ -5,7 +5,7 @@ from django.db import models
 # User Model
 class User(models.Model):
     name = models.CharField(max_length=50) 
-    email = models.EmailField(max_length=100, unique=True),
+    email = models.CharField(max_length=100)
     password = models.CharField(max_length=50) 
 
 def __str__(self):
@@ -21,3 +21,13 @@ class Pet(models.Model):
 
 def __str__(self):
     return self.name
+
+# class Pet_Diary(models.Model):
+#     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+
+#     class Health(models.Model):
+#         pass
+#     class Daily_Schedule(models.Model):
+#         pass
+#     class Appointments(models.Model):
+#         pass
