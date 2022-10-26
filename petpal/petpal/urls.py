@@ -26,5 +26,6 @@ urlpatterns = [
     path('', views.home, name = 'home'),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('pet/', include(router.urls))
+    path('pet/', include(router.urls)),
+    path('user/', include(router.urls))
 ]
