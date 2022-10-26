@@ -1,10 +1,15 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from django.http import HttpResponse
+from rest_framework import viewsets, permisssions
 from .serializers import UserSerializer, PetSerializer
-from .models import User
-from .models import Pet
+from .models import User, Pet
+
+
 
 # Create your views here.
+def home(request):
+    return HttpResponse('Pet Pal Home Page')
+
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer

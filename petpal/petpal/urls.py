@@ -23,6 +23,7 @@ router.register(r'user', views.UserView, 'user')
 router.register(r'pet', views.PetView, 'pet')
 
 urlpatterns = [
+    path('', views.home, name = 'home'),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('pet/', include(router.urls))
