@@ -1,8 +1,10 @@
-from enum import unique
 from django.db import models
 
 
+
+
 # User Model
+
 
 class User(models.Model):
     name = models.CharField(max_length=50) 
