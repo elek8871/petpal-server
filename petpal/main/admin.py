@@ -8,10 +8,9 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import Appointments, Daily, Pet_Diary, User, Health, Pet
 
-
 class UserCreationForm(forms.ModelForm):
-    username = forms.CharField(unique=True, max_length =250)
-    email = forms.EmailField(db_index=True, unique=True, max_length = 250)
+    username = forms.CharField( max_length =250)
+    email = forms.EmailField( max_length = 250)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
@@ -64,7 +63,7 @@ class UserAdmin(BaseUserAdmin):
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
     list_display = ('username', 'email', 'password')
-    list_filter = ('is_admin')
+    list_filter = ['is_admin']
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
     )

@@ -13,29 +13,30 @@ class UserManager(BaseUserManager):
             raise ValueError("Password must be provided")
         user = self.model(
             email = self.normalize_email(email),
-            username = username
+            username = username,
             **extra_fields
             )
         user.set_password(password)
         user.save(using=self._db)
         return user
+
     
-    def create_superuser(self, username, email, password, **extra_fields):
+    def create_superuser(self, username, password, **extra_fields):
         if password is None:
-          raise TypeError('Superusers must have a password.')
-        if email is None:
-            raise TypeError('Superusers must have an email.')
+            raise TypeError('Superusers must have a password.')
         if username is None:
             raise TypeError('Superusers must have an username.') 
 
         user = self.create_user(
             username = username,
-            email =self.normalize_email,
-            password = password
+            password = password,
+            email = "me@yahoo.com"
         )
         user.is_admin = True
         user.save(using=self._db)
         return user
+
+
 
 class User(AbstractBaseUser):
     username = models.CharField(unique=True, max_length =250)
