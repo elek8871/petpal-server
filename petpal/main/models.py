@@ -1,18 +1,45 @@
+from multiprocessing.managers import BaseManager
+from tabnanny import verbose
 from django.db import models
-
-
-
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 # User Model
+class UserManager(BaseManager):
+    def _create_user(self, email, password, username, **extra_fields):
+        if not email:
+            raise ValueError("Email must be provided")
+        if not password:
+            raise ValueError("Password must be provided")
+        user = self.model(
+            email = self.normalize_email(email),
+            username = first_name,
+            **extra_fields
+            )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_user(self, email, password, username, **extra_fields):
+        return self.create_user(email, password, username, **extra_fields)
+
+class User(AbstractBaseUser, PermissionsMixin):
+    # abstract base user has password, last_login, is active by default
+    
+    email =models.EmailField(db_index=True, unique=True, max_length = 250)
+    username = models.CharField(unique=True, max_length =250)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    objects = UserManager()
+
+    USER_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
+
+    class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"
 
 
-class User(models.Model):
-    name = models.CharField(max_length=50) 
-    email = models.CharField(max_length=100)
-    password = models.CharField(max_length=50) 
-
-    def __str__(self):
-        return self.name
 
 class Pet(models.Model):
     name = models.CharField(max_length=100) 
@@ -34,10 +61,10 @@ class Health(models.Model):
     visit_type = models.CharField(max_length=250)
     
 
-# class Daily(models.Model):
-#     pass
-# class Appointments(models.Model):
-#     pass
+class Daily(models.Model):
+    pass
 
-#     def __str__(self):
-    # return self.pet
+class Appointments(models.Model):
+    pass
+
+   

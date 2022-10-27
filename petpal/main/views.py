@@ -15,6 +15,7 @@ from .models import User, Pet
 def home(request):
     return HttpResponse('Pet Pal Home Page')
 
+# user sign up 
 def signup(request):
     if request.user.is_authenticated:
         # redirect to home page
@@ -39,6 +40,7 @@ def signup(request):
         # should this be a render
         return redirect (request, "/",{"form": form})
 
+# user login
 def signin(request):
     if request.user.is_authenticated:
         # need route for user homepage
@@ -59,11 +61,33 @@ def signin(request):
         form = AuthenticationForm()
         return redirect(request, "/", {'form': form})
 
+# user sign out
 def signout(request):
     logout(request)
     return redirect('/')
 
+#  ****** PET FUNCTIONS
+def pet(request):
+    pet = Pet.objects.all()
+    return (request, "pet/", {"pet":pet})
+# add new pet
+def pet_create(request):
+    if request.metod == "POST":
+        form = request.POST
+        if form.is_valid():
+            pet = PetSerializer.save()
+            return redirect("pet/")
+        else: 
+            form = PetSerializer
+            context = {"form": form, "header":"Add new pet"}
+        return (request, "pet/", context)
+
+# edit pet
       
+
+
+
+
 
 
 class UserView(viewsets.ModelViewSet):
