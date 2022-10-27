@@ -24,6 +24,7 @@ router.register(r'pet', views.PetView, 'pet')
 
 urlpatterns = [
     path('', views.home, name = 'home'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('pet/', include(router.urls)),

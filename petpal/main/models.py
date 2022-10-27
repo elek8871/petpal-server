@@ -3,6 +3,7 @@ from django.db import models
 
 
 # User Model
+
 class User(models.Model):
     name = models.CharField(max_length=50) 
     email = models.CharField(max_length=100)
@@ -17,7 +18,7 @@ class Pet(models.Model):
     date_of_birth = models.DateField(null=True)
     nickname = models.CharField(max_length=100) 
     catchphrase = models.CharField(max_length=250) 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -27,14 +28,14 @@ class Pet_Diary(models.Model):
     # will need FK from health, daily, appts
 
 class Health(models.Model):
-        visit_date = models.DateField(null=True)
-        visit_type = models.CharField(max_length=250)
+    visit_date = models.DateField(null=True)
+    visit_type = models.CharField(max_length=250)
     
 
-class Daily(models.Model):
-    pass
-class Appointments(models.Model):
-    pass
+# class Daily(models.Model):
+#     pass
+# class Appointments(models.Model):
+#     pass
 
-    def __str__(self):
-    return self.pet
+#     def __str__(self):
+    # return self.pet
