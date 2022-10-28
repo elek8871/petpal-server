@@ -1,26 +1,30 @@
 from rest_framework import serializers
 from .models import Appointments, Health, Pet, User, Daily
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import get_user_model
 
-# function to hash password
 def validate_password(self, value: str) -> str:
-    '''
-    hashed value passed by user
+    """
+    Hash value passed by user.
+    :param value: password of a user
+    :return: a hashed version of the password
+    """
+    return make_password(value)
 
-    :paramvalue: user password
-    :return: hashed pw
-    '''
-    return make_password
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id','username', 'email','password')
+User = get_user_model()
 
 class PetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
         fields = ('id', 'name', 'breed', 'date_of_birth', 'nickname', 'catchphrase','user')
+
+class UserSerializer(serializers.ModelSerializer):
+    # pets =PetSerializer(many=True, required =False)
+    def validate_password(self, value: str) -> str:
+        return make_password(value)
+    class Meta:
+        model = User
+        fields = "__all__"
 
 class HealthSerializer(serializers.ModelSerializer):
     class Meta:
