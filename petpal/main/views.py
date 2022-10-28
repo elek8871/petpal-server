@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from rest_framework import viewsets, permissions
 from django.http import HttpResponse
 
-from .serializers import UserSerializer, PetSerializer
+from .serializers import UserSerializer, PetSerializer, HealthSerializer, DailySerializer, AppointmentsSerializer
 
-from .models import User, Pet
+from .models import Appointments, User, Pet
 
 
 
@@ -25,6 +25,18 @@ class UserView(viewsets.ModelViewSet):
 class PetView(viewsets.ModelViewSet):
     serializer_class = PetSerializer
     queryset = Pet.objects.all()
+
+class HealthView(viewsets.ModelViewSet):
+    serializer_class = HealthSerializer
+    queryset = Health.objects.all()
+
+class DailyView(viewsets.ModelViewSet):
+    serializer_class = DailySerializer
+    queryset = Daily.objects.all()
+
+class AppointmentsView(viewsets.ModelViewSet):
+    serializer_class = AppointmentsSerializer
+    queryset = Appointments.objects.all()
 
 
 
