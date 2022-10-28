@@ -28,7 +28,7 @@ router.register(r'pet', views.PetView, 'pet')
 router.register(r'health', views.HealthView, 'health')
 router.register(r'daily', views.DailyView, 'daily')
 router.register(r'appointments', views.AppointmentsView, 'health')
-# router.register(r'pet_diary', views.Pet_DiaryView, 'pet_diary')
+
 
 urlpatterns = [
     path('', views.home, name = 'home'),
@@ -37,19 +37,11 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(router.urls)),
-    path('user/', include(router.urls)),
 
-    path('pet/', include(router.urls)),
-    path('health/', include(router.urls)),
-    path('daily/', include(router.urls)),
-    path('appointments/', include(router.urls)),
-
-
-
-    # path('pet/<int:pk>/edit/', include(router.urls)),
-    # path('pet/<int:pk>/health/'),include(router.urls),
-    # path('pet/<int:pk>/daily/'), include(router.urls),
-    # path('pet/<int:pk>/appointments/'), include(router.urls),
-    # path('pet/<int:pk>/diary/'), include(router.urls),
+    # path('user/', include(router.urls)),
+    # path('pet/', include(router.urls)),
+    # path('health/', include(router.urls)),
+    # path('daily/', include(router.urls)),
+    # path('appointments/', include(router.urls)),
 ]
-
+ 
