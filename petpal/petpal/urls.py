@@ -37,11 +37,5 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(router.urls)),
-
-    # path('user/', include(router.urls)),
-    # path('pet/', include(router.urls)),
-    # path('health/', include(router.urls)),
-    # path('daily/', include(router.urls)),
-    # path('appointments/', include(router.urls)),
 ]
  
